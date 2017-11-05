@@ -4,11 +4,11 @@ import glob
 configfile: "./config.yaml"
 
 # globals
-REF=config['genome']
-INDEX=config['index']
-GTF=config['gtf']
-ADAPTORS=config['adaptors']
-DIRS= ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/']
+REF = config['genome']
+INDEX = config['index']
+GTF = config['gtf']
+ADAPTORS = config['adaptors']
+DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/']
 
 # key step to get sample names from R1 read
 SAMPLES, = glob_wildcards(join('raw_reads',
@@ -33,7 +33,7 @@ rule all:
 rule project_setup:
     output: DIRS
     shell:
-        "mkdir -p " +' '.join(DIRS)
+        "mkdir -p "+' '.join(DIRS)
 
 rule make_index:
     input:
