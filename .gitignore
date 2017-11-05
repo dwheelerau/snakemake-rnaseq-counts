@@ -1,0 +1,6 @@
+raw_reads/
+bams/
+clean_reads/
+ref/
+counts/
+logs/

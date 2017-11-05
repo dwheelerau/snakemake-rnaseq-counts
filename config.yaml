@@ -1,0 +1,38 @@
+# computer setup
+threads: 12
+
+# dir structure
+raw_reads: "raw_reads"
+
+clean_reads_dir: "clean_reads"
+aln_dir: "bams"
+logs: "logs"
+
+# resources
+genome: "ref/Bos_taurus.UMD3.1.dna.toplevel.fa"
+index: "ref/Bos_taurus.UMD3.1.dna.toplevel"
+gtf: "ref/Bos_taurus.UMD3.1.90.gtf"
+adaptors: "scripts/contams_forward_rev.fa"
+
+# read pair pattern
+pat_r1: "{sample}_R1_001.fastq.gz"
+pat_r2: "{sample}_R2_001.fastq.gz"
+cln_r1: "{sample}_R1_001.cln.fastq.gz"
+cln_r2: "{sample}_R2_001.cln.fastq.gz"
+
+
+# trimming params
+minlen: 50
+qtrim: 'rl'
+trimq: 10
+ktrim: 'r'
+kwin: 21 
+mink: 11
+hdist: 1
+
+# mapping params hisat2 RF is nextseq stranded
+alnstrand: 'RF'
+
+# htseq-count 
+countstrand: 'reverse'
+mode: 'union'
