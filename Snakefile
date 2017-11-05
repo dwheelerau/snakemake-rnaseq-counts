@@ -88,7 +88,7 @@ rule aln:
     shell:
         """
         echo {output.sam} >> {log}
-        hisat2 -p {threads} -x {params.index} -q --dta -1 {input.r1} -2 {input.r2} --rna-strandness params.strand --novel-splicesite-outfile {output.splice} -S {output.sam} >> {log} 2>&1
+        hisat2 -p {threads} -x {params.index} -q --dta -1 {input.r1} -2 {input.r2} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} -S {output.sam} >> {log} 2>&1
         """
 
 rule sam_to_bam:

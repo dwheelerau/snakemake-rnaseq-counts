@@ -1,0 +1,379 @@
+Building DAG of jobs...
+Error: Directory cannot be locked. Please make sure that no other Snakemake process is trying to create the same files in the following directory:
+/media/hp3/projects3/TMP/snakemake-rnaseq-counts
+If you are sure that no other instances of snakemake are running on this directory, the remaining lock was likely caused by a kill signal or a power loss. It can be removed with the --unlock argument.
+Building DAG of jobs...
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	9	aln
+	9	aln_index
+	9	do_counts
+	1	make_index
+	1	project_setup
+	9	qc_trim
+	9	sam_to_bam
+	48
+
+rule qc_trim:
+    input: raw_reads/2535-07-21-01_R2_001.fastq.gz, raw_reads/2535-07-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-07-21-01_R2_001.cln.fastq.gz, clean_reads/2535-07-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 45
+    wildcards: sample=2535-07-21-01
+    threads: 12
+
+
+rule qc_trim:
+    input: raw_reads/2535-09-21-01_R2_001.fastq.gz, raw_reads/2535-09-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-09-21-01_R2_001.cln.fastq.gz, clean_reads/2535-09-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 22
+    wildcards: sample=2535-09-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx3761m -Xms3761m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-07-21-01_R1_001.fastq.gz in2=raw_reads/2535-07-21-01_R2_001.fastq.gz out1=clean_reads/2535-07-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-07-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx3761m -Xms3761m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-09-21-01_R1_001.fastq.gz in2=raw_reads/2535-09-21-01_R2_001.fastq.gz out1=clean_reads/2535-09-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-09-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-07-21-01_R1_001.fastq.gz, in2=raw_reads/2535-07-21-01_R2_001.fastq.gz, out1=clean_reads/2535-07-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-07-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Executing jgi.BBDukF [in1=raw_reads/2535-09-21-01_R1_001.fastq.gz, in2=raw_reads/2535-09-21-01_R2_001.fastq.gz, out1=clean_reads/2535-09-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-09-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=3780m, free=3642m, used=138m
+
+Initial:
+Memory: max=3780m, free=3662m, used=118m
+
+Added 117634 kmers; time: 	0.202 seconds.
+Memory: max=3780m, free=3484m, used=296m
+
+Added 117634 kmers; time: 	0.266 seconds.
+Memory: max=3780m, free=3464m, used=316m
+
+Input is being processed as paired
+Started output streams:	0.145 seconds.
+Input is being processed as paired
+Started output streams:	0.148 seconds.
+Processing time:   		663.268 seconds.
+
+Input:                  	155351158 reads 		19418894750 bases.
+QTrimmed:               	556399 reads (0.36%) 	56397296 bases (0.29%)
+KTrimmed:               	28325315 reads (18.23%) 	792460406 bases (4.08%)
+Total Removed:          	1179608 reads (0.76%) 	848857702 bases (4.37%)
+Result:                 	154171550 reads (99.24%) 	18570037048 bases (95.63%)
+
+Time:   			663.709 seconds.
+Reads Processed:        155m 	234.07k reads/sec
+Bases Processed:      19418m 	29.26m bases/sec
+Finished job 22.
+1 of 48 steps (2%) done
+
+rule qc_trim:
+    input: raw_reads/2535-08-21-01_R2_001.fastq.gz, raw_reads/2535-08-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-08-21-01_R2_001.cln.fastq.gz, clean_reads/2535-08-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 20
+    wildcards: sample=2535-08-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx15187m -Xms15187m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-08-21-01_R1_001.fastq.gz in2=raw_reads/2535-08-21-01_R2_001.fastq.gz out1=clean_reads/2535-08-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-08-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-08-21-01_R1_001.fastq.gz, in2=raw_reads/2535-08-21-01_R2_001.fastq.gz, out1=clean_reads/2535-08-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-08-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=15262m, free=14784m, used=478m
+
+Added 117634 kmers; time: 	0.153 seconds.
+Memory: max=15262m, free=13988m, used=1274m
+
+Input is being processed as paired
+Started output streams:	0.170 seconds.
+Processing time:   		727.123 seconds.
+
+Input:                  	171680902 reads 		21460112750 bases.
+QTrimmed:               	592316 reads (0.35%) 	55894528 bases (0.26%)
+KTrimmed:               	38731954 reads (22.56%) 	1176874716 bases (5.48%)
+Total Removed:          	2150056 reads (1.25%) 	1232769244 bases (5.74%)
+Result:                 	169530846 reads (98.75%) 	20227343506 bases (94.26%)
+
+Time:   			727.496 seconds.
+Reads Processed:        171m 	235.99k reads/sec
+Bases Processed:      21460m 	29.50m bases/sec
+Finished job 45.
+2 of 48 steps (4%) done
+
+rule qc_trim:
+    input: raw_reads/2535-03-21-01_R2_001.fastq.gz, raw_reads/2535-03-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-03-21-01_R2_001.cln.fastq.gz, clean_reads/2535-03-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 34
+    wildcards: sample=2535-03-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx23325m -Xms23325m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-03-21-01_R1_001.fastq.gz in2=raw_reads/2535-03-21-01_R2_001.fastq.gz out1=clean_reads/2535-03-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-03-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-03-21-01_R1_001.fastq.gz, in2=raw_reads/2535-03-21-01_R2_001.fastq.gz, out1=clean_reads/2535-03-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-03-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=23440m, free=22706m, used=734m
+
+Added 117634 kmers; time: 	0.155 seconds.
+Memory: max=23440m, free=21483m, used=1957m
+
+Input is being processed as paired
+Started output streams:	0.131 seconds.
+Processing time:   		630.567 seconds.
+
+Input:                  	149117974 reads 		18639746750 bases.
+QTrimmed:               	523855 reads (0.35%) 	50264892 bases (0.27%)
+KTrimmed:               	30966036 reads (20.77%) 	842920263 bases (4.52%)
+Total Removed:          	842974 reads (0.57%) 	893185155 bases (4.79%)
+Result:                 	148275000 reads (99.43%) 	17746561595 bases (95.21%)
+
+Time:   			630.912 seconds.
+Reads Processed:        149m 	236.35k reads/sec
+Bases Processed:      18639m 	29.54m bases/sec
+Finished job 20.
+3 of 48 steps (6%) done
+
+rule qc_trim:
+    input: raw_reads/2535-05-21-01_R2_001.fastq.gz, raw_reads/2535-05-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-05-21-01_R2_001.cln.fastq.gz, clean_reads/2535-05-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 18
+    wildcards: sample=2535-05-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx19787m -Xms19787m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-05-21-01_R1_001.fastq.gz in2=raw_reads/2535-05-21-01_R2_001.fastq.gz out1=clean_reads/2535-05-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-05-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-05-21-01_R1_001.fastq.gz, in2=raw_reads/2535-05-21-01_R2_001.fastq.gz, out1=clean_reads/2535-05-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-05-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=19884m, free=19262m, used=622m
+
+Added 117634 kmers; time: 	0.145 seconds.
+Memory: max=19884m, free=18224m, used=1660m
+
+Input is being processed as paired
+Started output streams:	0.100 seconds.
+Processing time:   		647.558 seconds.
+
+Input:                  	151419244 reads 		18927405500 bases.
+QTrimmed:               	547839 reads (0.36%) 	54336259 bases (0.29%)
+KTrimmed:               	28212199 reads (18.63%) 	761521602 bases (4.02%)
+Total Removed:          	923608 reads (0.61%) 	815857861 bases (4.31%)
+Result:                 	150495636 reads (99.39%) 	18111547639 bases (95.69%)
+
+Time:   			647.866 seconds.
+Reads Processed:        151m 	233.72k reads/sec
+Bases Processed:      18927m 	29.21m bases/sec
+Finished job 34.
+4 of 48 steps (8%) done
+
+rule qc_trim:
+    input: raw_reads/2535-01-21-01_R2_001.fastq.gz, raw_reads/2535-01-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-01-21-01_R2_001.cln.fastq.gz, clean_reads/2535-01-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 44
+    wildcards: sample=2535-01-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx21327m -Xms21327m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-01-21-01_R1_001.fastq.gz in2=raw_reads/2535-01-21-01_R2_001.fastq.gz out1=clean_reads/2535-01-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-01-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-01-21-01_R1_001.fastq.gz, in2=raw_reads/2535-01-21-01_R2_001.fastq.gz, out1=clean_reads/2535-01-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-01-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=21432m, free=20649m, used=783m
+
+Added 117634 kmers; time: 	0.140 seconds.
+Memory: max=21432m, free=19643m, used=1789m
+
+Input is being processed as paired
+Started output streams:	0.123 seconds.
+Processing time:   		637.539 seconds.
+
+Input:                  	148954368 reads 		18619296000 bases.
+QTrimmed:               	537441 reads (0.36%) 	53400553 bases (0.29%)
+KTrimmed:               	30138534 reads (20.23%) 	849723942 bases (4.56%)
+Total Removed:          	1149940 reads (0.77%) 	903124495 bases (4.85%)
+Result:                 	147804428 reads (99.23%) 	17716171505 bases (95.15%)
+
+Time:   			637.804 seconds.
+Reads Processed:        148m 	233.54k reads/sec
+Bases Processed:      18619m 	29.19m bases/sec
+Finished job 18.
+5 of 48 steps (10%) done
+
+rule qc_trim:
+    input: raw_reads/2535-06-21-01_R2_001.fastq.gz, raw_reads/2535-06-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-06-21-01_R2_001.cln.fastq.gz, clean_reads/2535-06-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 38
+    wildcards: sample=2535-06-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx20656m -Xms20656m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-06-21-01_R1_001.fastq.gz in2=raw_reads/2535-06-21-01_R2_001.fastq.gz out1=clean_reads/2535-06-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-06-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-06-21-01_R1_001.fastq.gz, in2=raw_reads/2535-06-21-01_R2_001.fastq.gz, out1=clean_reads/2535-06-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-06-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=20757m, free=20107m, used=650m
+
+Added 117634 kmers; time: 	0.272 seconds.
+Memory: max=20757m, free=19024m, used=1733m
+
+Input is being processed as paired
+Started output streams:	0.160 seconds.
+Processing time:   		654.922 seconds.
+
+Input:                  	151442660 reads 		18930332500 bases.
+QTrimmed:               	528740 reads (0.35%) 	51595460 bases (0.27%)
+KTrimmed:               	34337235 reads (22.67%) 	985927891 bases (5.21%)
+Total Removed:          	1298286 reads (0.86%) 	1037523351 bases (5.48%)
+Result:                 	150144374 reads (99.14%) 	17892809149 bases (94.52%)
+
+Time:   			655.205 seconds.
+Reads Processed:        151m 	231.14k reads/sec
+Bases Processed:      18930m 	28.89m bases/sec
+Finished job 44.
+6 of 48 steps (12%) done
+
+rule qc_trim:
+    input: raw_reads/2535-04-21-01_R2_001.fastq.gz, raw_reads/2535-04-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-04-21-01_R2_001.cln.fastq.gz, clean_reads/2535-04-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 17
+    wildcards: sample=2535-04-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx20944m -Xms20944m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-04-21-01_R1_001.fastq.gz in2=raw_reads/2535-04-21-01_R2_001.fastq.gz out1=clean_reads/2535-04-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-04-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-04-21-01_R1_001.fastq.gz, in2=raw_reads/2535-04-21-01_R2_001.fastq.gz, out1=clean_reads/2535-04-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-04-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=21046m, free=20277m, used=769m
+
+Added 117634 kmers; time: 	0.111 seconds.
+Memory: max=21046m, free=19289m, used=1757m
+
+Input is being processed as paired
+Started output streams:	0.123 seconds.
+Processing time:   		632.244 seconds.
+
+Input:                  	147354620 reads 		18419327500 bases.
+QTrimmed:               	511264 reads (0.35%) 	48900863 bases (0.27%)
+KTrimmed:               	31949959 reads (21.68%) 	877501804 bases (4.76%)
+Total Removed:          	953248 reads (0.65%) 	926402667 bases (5.03%)
+Result:                 	146401372 reads (99.35%) 	17492924833 bases (94.97%)
+
+Time:   			632.696 seconds.
+Reads Processed:        147m 	232.90k reads/sec
+Bases Processed:      18419m 	29.11m bases/sec
+Finished job 38.
+7 of 48 steps (15%) done
+
+rule qc_trim:
+    input: raw_reads/2535-02-21-01_R2_001.fastq.gz, raw_reads/2535-02-21-01_R1_001.fastq.gz
+    output: clean_reads/2535-02-21-01_R2_001.cln.fastq.gz, clean_reads/2535-02-21-01_R1_001.cln.fastq.gz
+    log: logs/trim_log.txt
+    jobid: 40
+    wildcards: sample=2535-02-21-01
+    threads: 12
+
+java -Djava.library.path=/opt/bbmap/jni/ -ea -Xmx20811m -Xms20811m -cp /opt/bbmap/current/ jgi.BBDukF in1=raw_reads/2535-02-21-01_R1_001.fastq.gz in2=raw_reads/2535-02-21-01_R2_001.fastq.gz out1=clean_reads/2535-02-21-01_R1_001.cln.fastq.gz out2=clean_reads/2535-02-21-01_R2_001.cln.fastq.gz minlen=50 qtrim=rl trimq=10 ktrim=r k=21 mink=11 ref=contams_forward_rev.fa hdist=1
+Executing jgi.BBDukF [in1=raw_reads/2535-02-21-01_R1_001.fastq.gz, in2=raw_reads/2535-02-21-01_R2_001.fastq.gz, out1=clean_reads/2535-02-21-01_R1_001.cln.fastq.gz, out2=clean_reads/2535-02-21-01_R2_001.cln.fastq.gz, minlen=50, qtrim=rl, trimq=10, ktrim=r, k=21, mink=11, ref=contams_forward_rev.fa, hdist=1]
+
+BBDuk version 36.86
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=20913m, free=20259m, used=654m
+
+Added 117634 kmers; time: 	0.164 seconds.
+Memory: max=20913m, free=19168m, used=1745m
+
+Input is being processed as paired
+Started output streams:	0.122 seconds.
+Processing time:   		626.227 seconds.
+
+Input:                  	147241590 reads 		18405198750 bases.
+QTrimmed:               	520316 reads (0.35%) 	51331421 bases (0.28%)
+KTrimmed:               	33243904 reads (22.58%) 	987021870 bases (5.36%)
+Total Removed:          	1609856 reads (1.09%) 	1038353291 bases (5.64%)
+Result:                 	145631734 reads (98.91%) 	17366845459 bases (94.36%)
+
+Time:   			626.482 seconds.
+Reads Processed:        147m 	235.03k reads/sec
+Bases Processed:      18405m 	29.38m bases/sec
+Finished job 17.
+8 of 48 steps (17%) done
+
+rule make_index:
+    input: ref/Bos_taurus.UMD3.1.dna.toplevel.fa
+    output: ref/Bos_taurus.UMD3.1.dna.toplevel.1.ht2
+    log: logs/index_log.txt
+    jobid: 37
+    threads: 12
+
+Processing time:   		601.522 seconds.
+
+Input:                  	151008512 reads 		18876064000 bases.
+QTrimmed:               	521426 reads (0.35%) 	50120801 bases (0.27%)
+KTrimmed:               	32794069 reads (21.72%) 	933810646 bases (4.95%)
+Total Removed:          	1245060 reads (0.82%) 	983931447 bases (5.21%)
+Result:                 	149763452 reads (99.18%) 	17892132553 bases (94.79%)
+
+Time:   			601.829 seconds.
+Reads Processed:        151m 	250.92k reads/sec
+Bases Processed:      18876m 	31.36m bases/sec
+Finished job 40.
+9 of 48 steps (19%) done
+
+rule project_setup:
+    output: bams/, raw_reads/, clean_reads/, logs/, counts/
+    jobid: 1
+
+Warning: the following output files of rule project_setup were not present when the DAG was created:
+{'clean_reads/'}
+[Errno 20] Not a directory: 'raw_reads/'
+Skipped removing non-empty directory clean_reads/
+Skipped removing non-empty directory logs/
+Finished job 1.
+10 of 48 steps (21%) done
+Finished job 37.
+11 of 48 steps (23%) done
+
+rule aln:
+    input: clean_reads/2535-07-21-01_R2_001.cln.fastq.gz, clean_reads/2535-07-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa
+    output: bams/2535-07-21-01.sam, ref/2535-07-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 32
+    wildcards: sample=2535-07-21-01
+    threads: 24
+
+Error in rule aln:
+    jobid: 32
+    output: bams/2535-07-21-01.sam, ref/2535-07-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+
+RuleException:
+CalledProcessError in line 89 of /media/hp3/projects3/TMP/snakemake-rnaseq-counts/Snakefile:
+Command ' set -euo pipefail;  
+        echo bams/2535-07-21-01.sam >> logs/aln_log.txt
+        hisat2 -p 24 -x ref/Bos_taurus.UMD3.1.dna.toplevel -q --dta -1 clean_reads/2535-07-21-01_R1_001.cln.fastq.gz -2 clean_reads/2535-07-21-01_R2_001.cln.fastq.gz --rna-strandness params.strand --novel-splicesite-outfile ref/2535-07-21-01.novel_splices.txt -S bams/2535-07-21-01.sam >> logs/aln_log.txt 2>&1 ' returned non-zero exit status 1
+  File "/media/hp3/projects3/TMP/snakemake-rnaseq-counts/Snakefile", line 89, in __rule_aln
+  File "/usr/lib/python3.5/concurrent/futures/thread.py", line 55, in run
+Will exit after finishing currently running jobs.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2017-11-06T101029.515915.snakemake.log
