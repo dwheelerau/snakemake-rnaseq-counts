@@ -1,13 +1,3 @@
-# computer setup
-threads: 12
-
-# dir structure
-raw_reads: "raw_reads"
-
-clean_reads_dir: "clean_reads"
-aln_dir: "bams"
-logs: "logs"
-
 # resources
 genome: "ref/Bos_taurus.UMD3.1.dna.toplevel.fa"
 index: "ref/Bos_taurus.UMD3.1.dna.toplevel"
