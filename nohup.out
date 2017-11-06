@@ -377,3 +377,253 @@ Command ' set -euo pipefail;
 Will exit after finishing currently running jobs.
 Exiting because a job execution failed. Look above for error message
 Complete log: .snakemake/log/2017-11-06T101029.515915.snakemake.log
+Building DAG of jobs...
+Provided cores: 24
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	9	aln
+	9	aln_index
+	9	do_counts
+	9	sam_to_bam
+	37
+
+rule aln:
+    input: clean_reads/2535-07-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-07-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-07-21-01.sam, ref/2535-07-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 13
+    wildcards: sample=2535-07-21-01
+    threads: 24
+
+Finished job 13.
+1 of 37 steps (3%) done
+
+rule aln:
+    input: clean_reads/2535-09-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-09-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-09-21-01.sam, ref/2535-09-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 14
+    wildcards: sample=2535-09-21-01
+    threads: 24
+
+Finished job 14.
+2 of 37 steps (5%) done
+
+rule aln:
+    input: clean_reads/2535-03-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-03-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-03-21-01.sam, ref/2535-03-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 32
+    wildcards: sample=2535-03-21-01
+    threads: 24
+
+Finished job 32.
+3 of 37 steps (8%) done
+
+rule aln:
+    input: clean_reads/2535-01-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-01-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-01-21-01.sam, ref/2535-01-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 12
+    wildcards: sample=2535-01-21-01
+    threads: 24
+
+Finished job 12.
+4 of 37 steps (11%) done
+
+rule aln:
+    input: clean_reads/2535-08-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-08-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-08-21-01.sam, ref/2535-08-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 9
+    wildcards: sample=2535-08-21-01
+    threads: 24
+
+Finished job 9.
+5 of 37 steps (14%) done
+
+rule aln:
+    input: clean_reads/2535-05-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-05-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-05-21-01.sam, ref/2535-05-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 21
+    wildcards: sample=2535-05-21-01
+    threads: 24
+
+Finished job 21.
+6 of 37 steps (16%) done
+
+rule aln:
+    input: clean_reads/2535-06-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-06-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-06-21-01.sam, ref/2535-06-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 24
+    wildcards: sample=2535-06-21-01
+    threads: 24
+
+Finished job 24.
+7 of 37 steps (19%) done
+
+rule aln:
+    input: clean_reads/2535-04-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-04-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-04-21-01.sam, ref/2535-04-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 37
+    wildcards: sample=2535-04-21-01
+    threads: 24
+
+Finished job 37.
+8 of 37 steps (22%) done
+
+rule aln:
+    input: clean_reads/2535-02-21-01_R1_001.cln.fastq.gz, ref/Bos_taurus.UMD3.1.dna.toplevel.fa, clean_reads/2535-02-21-01_R2_001.cln.fastq.gz
+    output: bams/2535-02-21-01.sam, ref/2535-02-21-01.novel_splices.txt
+    log: logs/aln_log.txt
+    jobid: 26
+    wildcards: sample=2535-02-21-01
+    threads: 24
+
+Finished job 26.
+9 of 37 steps (24%) done
+
+rule sam_to_bam:
+    input: bams/2535-03-21-01.sam
+    output: bams/2535-03-21-01.sbn.bam
+    jobid: 11
+    wildcards: sample=2535-03-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-07-21-01.sam
+    output: bams/2535-07-21-01.sbn.bam
+    jobid: 17
+    wildcards: sample=2535-07-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-04-21-01.sam
+    output: bams/2535-04-21-01.sbn.bam
+    jobid: 1
+    wildcards: sample=2535-04-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-08-21-01.sam
+    output: bams/2535-08-21-01.sbn.bam
+    jobid: 23
+    wildcards: sample=2535-08-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-09-21-01.sam
+    output: bams/2535-09-21-01.sbn.bam
+    jobid: 15
+    wildcards: sample=2535-09-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-06-21-01.sam
+    output: bams/2535-06-21-01.sbn.bam
+    jobid: 42
+    wildcards: sample=2535-06-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-01-21-01.sam
+    output: bams/2535-01-21-01.sbn.bam
+    jobid: 43
+    wildcards: sample=2535-01-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-05-21-01.sam
+    output: bams/2535-05-21-01.sbn.bam
+    jobid: 45
+    wildcards: sample=2535-05-21-01
+
+
+rule sam_to_bam:
+    input: bams/2535-02-21-01.sam
+    output: bams/2535-02-21-01.sbn.bam
+    jobid: 36
+    wildcards: sample=2535-02-21-01
+
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[bam_header_read] EOF marker is absent. The input is probably truncated.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[samopen] SAM header is present: 3317 sequences.
+[bam_sort_core] merging from 118 files...
+[bam_sort_core] merging from 120 files...
+[bam_sort_core] merging from 118 files...
+[bam_sort_core] merging from 123 files...
+Finished job 23.
+10 of 37 steps (27%) done
+
+rule do_counts:
+    input: bams/2535-08-21-01.sbn.bam
+    output: counts/2535-08-21-01.sbn.counts
+    log: logs/2535-08-21-01_count.log
+    jobid: 25
+    wildcards: sample=2535-08-21-01
+
+
+rule aln_index:
+    input: bams/2535-08-21-01.sbn.bam
+    output: bams/2535-08-21-01.sbn.bam.bai
+    jobid: 28
+    wildcards: sample=2535-08-21-01
+
+[bam_index_core] the alignment is not sorted (7001326F:112:CBKWHANXX:1:1101:1205:80044): 17-th chr > 11-th chr
+[bam_index_build2] fail to index the BAM file.
+Waiting at most 5 seconds for missing files.
+Will exit after finishing currently running jobs.
+Finished job 11.
+11 of 37 steps (30%) done
+Will exit after finishing currently running jobs.
+[bam_sort_core] merging from 141 files...
+Finished job 45.
+12 of 37 steps (32%) done
+Will exit after finishing currently running jobs.
+Finished job 15.
+13 of 37 steps (35%) done
+Will exit after finishing currently running jobs.
+[bam_sort_core] merging from 154 files...
+[bam_sort_core] merging from 156 files...
+Finished job 42.
+14 of 37 steps (38%) done
+Will exit after finishing currently running jobs.
+[bam_sort_core] merging from 140 files...
+Finished job 43.
+15 of 37 steps (41%) done
+Will exit after finishing currently running jobs.
+Finished job 1.
+16 of 37 steps (43%) done
+Will exit after finishing currently running jobs.
+[bam_sort_core] merging from 227 files...
+Finished job 17.
+17 of 37 steps (46%) done
+Will exit after finishing currently running jobs.
+Finished job 25.
+18 of 37 steps (49%) done
+Will exit after finishing currently running jobs.
+Finished job 36.
+19 of 37 steps (51%) done
+Will exit after finishing currently running jobs.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2017-11-06T111300.758823.snakemake.log

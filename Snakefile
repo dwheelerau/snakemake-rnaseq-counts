@@ -26,9 +26,7 @@ rule all:
         expand('{INDEX}.1.ht2', INDEX=INDEX),
         expand('bams/{sample}.sam', sample=SAMPLES),
         expand('bams/{sample}.sbn.bam', sample=SAMPLES),
-        expand('bams/{sample}.sbn.bam.bai', sample=SAMPLES),
         expand('counts/{sample}.sbn.counts', sample=SAMPLES)
-        #PATTERN_CLN_R1, PATTERN_CLN_R2
 
 rule project_setup:
     output: DIRS
@@ -99,14 +97,14 @@ rule sam_to_bam:
     shell:
         "samtools view -bS {input} | samtools sort -n - bams/{wildcards.sample}.sbn"
 
-# not working
-rule aln_index:
-    input:
-        'bams/{sample}.sbn.bam'
-    output:
-        'bams/{sample}.sbn.bam.bai'
-    shell:
-        "samtools index {input}"
+# does not work on name sorted files, bugger
+#rule aln_index:
+#    input:
+#        'bams/{sample}.sbn.bam'
+#    output:
+#        'bams/{sample}.sbn.bam.bai'
+#    shell:
+#        "samtools index {input}"
 
 rule do_counts:
     input:
@@ -122,8 +120,12 @@ rule do_counts:
         'htseq-count -r name -s {params.strand} -f bam -m {params.countmode} {input} '
         '{GTF} > {output} 2> {log}'
 
-#rule count:
-#
+rule clean_up:
+    input:
+        'counts/{sample}.sbn.counts'
+    shell:
+        'rm bams/*sam'
+
 #rule clean:
 #    shell:
 #        'rm ./ref/*.bt2 {ALN_DIR}/*.sam'
