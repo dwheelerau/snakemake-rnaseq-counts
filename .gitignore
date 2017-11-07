@@ -6,3 +6,4 @@ clean_reads/
 ref/
 counts/
 logs/
+nohup*
