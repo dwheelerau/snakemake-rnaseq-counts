@@ -119,13 +119,3 @@ rule do_counts:
     shell:
         'htseq-count -r name -s {params.strand} -f bam -m {params.countmode} {input} '
         '{GTF} > {output} 2> {log}'
-
-rule clean_up:
-    input:
-        'counts/{sample}.sbn.counts'
-    shell:
-        'rm bams/*sam'
-
-#rule clean:
-#    shell:
-#        'rm ./ref/*.bt2 {ALN_DIR}/*.sam'
