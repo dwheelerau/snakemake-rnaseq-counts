@@ -1,15 +1,12 @@
 # resources
-genome: "ref/Bos_taurus.UMD3.1.dna.toplevel.fa"
-index: "ref/Bos_taurus.UMD3.1.dna.toplevel"
-gtf: "ref/Bos_taurus.UMD3.1.90.gtf"
+genome: "ref/Danio_rerio.GRCz10.dna.toplevel.fa"
+index: "ref/Danio_rerio.GRCz10.dna.toplevel"
+gtf: "ref/Danio_rerio.GRCz10.91.gtf"
 adaptors: "contams_forward_rev.fa"
 
 # read pair pattern
 pat_r1: "{sample}_R1_001.fastq.gz"
-pat_r2: "{sample}_R2_001.fastq.gz"
 cln_r1: "{sample}_R1_001.cln.fastq.gz"
-cln_r2: "{sample}_R2_001.cln.fastq.gz"
-
 
 # trimming params
 minlen: 50

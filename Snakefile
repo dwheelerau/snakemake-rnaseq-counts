@@ -10,14 +10,12 @@ GTF = config['gtf']
 ADAPTORS = config['adaptors']
 DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/']
 
-# key step to get sample names from R1 read
+# key step to get sample names from R1 read, example: AG0069-01_R1_001.fastq.gz
 SAMPLES, = glob_wildcards(join('raw_reads',
-    '{samples,2535[^/]+}_R1_001.fastq.gz'))
+    '{samples,AG0069[^/]+}_R1_001.fastq.gz'))
 
 PATTERN_R1 = config['pat_r1']
-PATTERN_R2 = config['pat_r2']
 PATTERN_CLN_R1 = config['cln_r1']
-PATTERN_CLN_R2 = config['cln_r2']
 
 rule all:
     input:
