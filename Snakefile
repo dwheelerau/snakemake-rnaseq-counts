@@ -60,7 +60,7 @@ rule qc_trim:
     log:
         'logs/trim_log.txt'
     shell:
-        "/opt/bbmap/bbduk.sh in={input.r1} out={output.r1_out} "
+        "bbduk.sh in={input.r1} out={output.r1_out} "
         "minlen={params.minlen} qtrim={params.qtrim} trimq={params.trimq} "
         "ktrim={params.ktrim} k={params.kwin} mink={params.mink} "
         "ref={ADAPTORS} hdist={params.hdist} 2>&1 | tee -a {log}"
