@@ -13,10 +13,11 @@ DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/']
 # key step to get sample names from R1 read, example: AG0069-01_R1_001.fastq.gz
 SAMPLES, = glob_wildcards(join('raw_reads',
     '{samples,AG0069[^/]+}_R1_001.fastq.gz'))
+print(SAMPLES)
 
 PATTERN_R1 = config['pat_r1']
 PATTERN_CLN_R1 = config['cln_r1']
-
+print(PATTERN_R1)
 rule all:
     input:
         expand('clean_reads/{sample}_R1_001.cln.fastq.gz', sample=SAMPLES),
@@ -45,7 +46,6 @@ rule make_index:
 rule qc_trim:
     input:
         r1 = join('raw_reads', PATTERN_R1),
-        r2 = join('raw_reads', PATTERN_R2)
     threads: 12
     params:
         minlen=config['minlen'],
@@ -57,11 +57,10 @@ rule qc_trim:
         hdist=config['hdist']
     output:
         r1_out = 'clean_reads/{sample}_R1_001.cln.fastq.gz',
-        r2_out = 'clean_reads/{sample}_R2_001.cln.fastq.gz'
     log:
         'logs/trim_log.txt'
     shell:
-        "/opt/bbmap/bbduk.sh in1={input.r1} in2={input.r2} out1={output.r1_out} out2={output.r2_out} "
+        "/opt/bbmap/bbduk.sh in={input.r1} out={output.r1_out} "
         "minlen={params.minlen} qtrim={params.qtrim} trimq={params.trimq} "
         "ktrim={params.ktrim} k={params.kwin} mink={params.mink} "
         "ref={ADAPTORS} hdist={params.hdist} 2>&1 | tee -a {log}"
@@ -71,7 +70,6 @@ rule aln:
     input:
         ref=expand('{REF}',REF=REF),
         r1 = join('clean_reads', PATTERN_CLN_R1),
-        r2 = join('clean_reads', PATTERN_CLN_R2)
     log:
         'logs/aln_log.txt'
     output:
@@ -84,7 +82,7 @@ rule aln:
     shell:
         """
         echo {output.sam} >> {log}
-        hisat2 -p {threads} -x {params.index} -q --dta -1 {input.r1} -2 {input.r2} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} -S {output.sam} >> {log} 2>&1
+        hisat2 -p {threads} -x {params.index} -q --dta -U {input.r1} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} -S {output.sam} >> {log} 2>&1
         """
 
 rule sam_to_bam:
