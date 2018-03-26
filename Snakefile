@@ -8,24 +8,27 @@ REF = config['genome']
 INDEX = config['index']
 GTF = config['gtf']
 ADAPTORS = config['adaptors']
-DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/']
+DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/', 'tables/']
 
 # key step to get sample names from R1 read, example: AG0069-01_R1_001.fastq.gz
 SAMPLES, = glob_wildcards(join('raw_reads',
     '{samples,AG0069[^/]+}_R1_001.fastq.gz'))
+
+print('Using the following sample wildcards')
 print(SAMPLES)
 
 PATTERN_R1 = config['pat_r1']
 PATTERN_CLN_R1 = config['cln_r1']
-print(PATTERN_R1)
+
 rule all:
     input:
         expand('clean_reads/{sample}_R1_001.cln.fastq.gz', sample=SAMPLES),
         REF, GTF, ADAPTORS, DIRS,
         expand('{INDEX}.1.ht2', INDEX=INDEX),
         expand('bams/{sample}.sam', sample=SAMPLES),
-        expand('bams/{sample}.sbn.bam', sample=SAMPLES),
-        expand('counts/{sample}.sbn.counts', sample=SAMPLES)
+        expand('counts/{sample}.sbn.counts', sample=SAMPLES),
+        'logs/count_results.log',
+        'tables/qc_tab.tex'
 
 rule project_setup:
     output: DIRS
@@ -91,9 +94,10 @@ rule sam_to_bam:
     output:
         'bams/{sample}.sbn.bam'
     shell:
-        "samtools view -bS {input} | samtools sort -n - bams/{wildcards.sample}.sbn"
+        "samtools sort -n {input} -o {output} -O BAM"
 
 # does not work on name sorted files, bugger
+# req position sorted bams, so leave for now?
 #rule aln_index:
 #    input:
 #        'bams/{sample}.sbn.bam'
@@ -115,3 +119,17 @@ rule do_counts:
     shell:
         'htseq-count -r name -s {params.strand} -f bam -m {params.countmode} {input} '
         '{GTF} > {output} 2> {log}'
+
+rule log_count_result:
+    output:
+        'logs/count_results.log'
+    shell:
+        'tail -n5 counts/*counts > {output}'
+
+rule make_qc_table:
+    input:
+        'logs/trim_log.txt'
+    output:
+        'tables/qc_tab.tex'
+    shell:
+        'python scripts/make_qc_tab.py {input} > {output}'

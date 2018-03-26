@@ -6,4 +6,7 @@ clean_reads/
 ref/
 counts/
 logs/
+tables/
 nohup*
+!scripts/
+!scripts/*
