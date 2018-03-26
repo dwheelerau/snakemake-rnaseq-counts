@@ -20,14 +20,15 @@ def escape_percent(row):
 header = '''
 \\begin{table}[H]
 \\begin{tabular}{ | l | r |}
-   '''
+'''
+
 footer = '''
 \hline
 \end{tabular}
 \caption{Summary of read alignment results.}
 \label{table:qc}
 \end{table}
-    '''
+'''
 
 result = []
 

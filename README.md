@@ -17,3 +17,4 @@ removed during the cleaning process.
     &`, using as many cores are you have available.  
 5.  The final output will be ht-seq based counts for each sample. These can be
     used as raw reads for DESeq2.
+6.  Latex tables are generated automatically for the qc and alnment data  

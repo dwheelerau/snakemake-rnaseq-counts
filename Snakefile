@@ -28,7 +28,8 @@ rule all:
         expand('bams/{sample}.sam', sample=SAMPLES),
         expand('counts/{sample}.sbn.counts', sample=SAMPLES),
         'logs/count_results.log',
-        'tables/qc_tab.tex'
+        'tables/qc_tab.tex',
+        'tables/aln_tab.tex'
 
 rule project_setup:
     output: DIRS
@@ -128,8 +129,13 @@ rule log_count_result:
 
 rule make_qc_table:
     input:
-        'logs/trim_log.txt'
+        qc='logs/trim_log.txt',
+        aln='logs/aln_log.txt'
     output:
-        'tables/qc_tab.tex'
+        qc='tables/qc_tab.tex',
+        aln='tables/aln_tab.tex'
     shell:
-        'python scripts/make_qc_tab.py {input} > {output}'
+        """
+        python scripts/make_qc_tab.py {input.qc} > {output.qc}
+        python scripts/make_aln_tab.py {input.aln} > {output.aln}
+        """
