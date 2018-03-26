@@ -122,6 +122,8 @@ rule do_counts:
         '{GTF} > {output} 2> {log}'
 
 rule log_count_result:
+    input:
+        'counts/{sample}.sbn.counts'
     output:
         'logs/count_results.log'
     shell:
