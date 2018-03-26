@@ -5,6 +5,11 @@ workflow. Trimming and filtering is also carried out using bbduk.
 # Details  
 Open the `config.yaml` file in a text editor and change the params as required.  
 
+Need to create an index first.  
+Run ```snakemake make_index --cores 12```  
+
+Run the script ```snakemake all --cores 12```  
+
 # Requirements   
 1.  The raw sequenced reads need to be found in a directory called `raw_reads`, the
 script expects the reads to be fastq.gz files, though it may work with standard

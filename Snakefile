@@ -27,9 +27,7 @@ rule all:
         expand('{INDEX}.1.ht2', INDEX=INDEX),
         expand('bams/{sample}.sam', sample=SAMPLES),
         expand('counts/{sample}.sbn.counts', sample=SAMPLES),
-        'logs/count_results.log',
-        'tables/qc_tab.tex',
-        'tables/aln_tab.tex'
+        'logs/count_results.log'
 
 rule project_setup:
     output: DIRS
@@ -78,7 +76,7 @@ rule aln:
         'logs/aln_log.txt'
     output:
         sam='bams/{sample}.sam',
-        splice='ref/{sample}.novel_splices.txt'
+        splice='ref/{sample}.novel_splices.txt',
     params:
         index=expand('{INDEX}',INDEX=INDEX),
         strand=config['alnstrand']
@@ -87,6 +85,8 @@ rule aln:
         """
         echo {output.sam} >> {log}
         hisat2 -p {threads} -x {params.index} -q --dta -U {input.r1} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} -S {output.sam} >> {log} 2>&1
+        python scripts/make_aln_tab.py {log} > tables/aln_table.tex
+        python scripts/make_qc_tab.py logs/trim_log.txt > tables/qc_table.tex
         """
 
 rule sam_to_bam:
@@ -127,15 +127,14 @@ rule log_count_result:
     shell:
         'tail -n5 counts/*counts > {output}'
 
-rule make_qc_table:
-    input:
-        qc='logs/trim_log.txt',
-        aln='logs/aln_log.txt'
-    output:
-        qc='tables/qc_tab.tex',
-        aln='tables/aln_tab.tex'
+rule clean:
     shell:
         """
-        python scripts/make_qc_tab.py {input.qc} > {output.qc}
-        python scripts/make_aln_tab.py {input.aln} > {output.aln}
+        rm -f bams/*
+        rm -f tables/*
+        rm -f counts/*
+        rm -f logs/*
+        rm -f clean_reads/*
+        rm -f ref/*ht2
+        rm -f ref/*novel_splices.txt
         """
