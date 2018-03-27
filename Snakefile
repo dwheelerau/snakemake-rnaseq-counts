@@ -8,7 +8,7 @@ REF = config['genome']
 INDEX = config['index']
 GTF = config['gtf']
 ADAPTORS = config['adaptors']
-DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/', 'tables/']
+DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/', 'tables/', 'ref/']
 
 # key step to get sample names from R1 read, example: AG0069-01_R1_001.fastq.gz
 SAMPLES, = glob_wildcards(join('raw_reads',
@@ -58,7 +58,7 @@ rule qc_trim:
         mink=config['mink'],
         hdist=config['hdist']
     output:
-        r1_out = 'clean_reads/{sample}_R1_001.cln.fastq.gz',
+        r1_out = 'clean_reads/{sample}_R1_001.cln.fastq.gz'
     log:
         'logs/trim_log.txt'
     shell:
@@ -71,12 +71,12 @@ rule qc_trim:
 rule aln:
     input:
         ref=expand('{REF}',REF=REF),
-        r1 = join('clean_reads', PATTERN_CLN_R1),
-    log:
-        'logs/aln_log.txt'
+        r1=join('clean_reads', PATTERN_CLN_R1)
     output:
         sam='bams/{sample}.sam',
-        splice='ref/{sample}.novel_splices.txt',
+        splice='ref/{sample}.novel_splices.txt'
+    log:
+        'logs/aln_log.txt'
     params:
         index=expand('{INDEX}',INDEX=INDEX),
         strand=config['alnstrand']
@@ -85,8 +85,6 @@ rule aln:
         """
         echo {output.sam} >> {log}
         hisat2 -p {threads} -x {params.index} -q --dta -U {input.r1} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} -S {output.sam} >> {log} 2>&1
-        python scripts/make_aln_tab.py {log} > tables/aln_table.tex
-        python scripts/make_qc_tab.py logs/trim_log.txt > tables/qc_table.tex
         """
 
 rule sam_to_bam:
@@ -111,7 +109,7 @@ rule do_counts:
     input:
         'bams/{sample}.sbn.bam'
     output:
-        'counts/{sample}.sbn.counts'
+        count='counts/{sample}.sbn.counts',
     log:
         'logs/{sample}_count.log'
     params:
@@ -119,15 +117,28 @@ rule do_counts:
         countmode=config['mode']
     shell:
         'htseq-count -r name -s {params.strand} -f bam -m {params.countmode} {input} '
-        '{GTF} > {output} 2> {log}'
+        '{GTF} > {output.count} 2> {log}'
 
 rule log_count_result:
     input:
-        'counts/{sample}.sbn.counts'
+        expand('counts/{sample}.sbn.counts', sample=SAMPLES)
     output:
-        'logs/count_results.log'
+        'logs/count_results.log',
     shell:
         'tail -n5 counts/*counts > {output}'
+
+rule make_latex_tables:
+    input:
+        aln='logs/aln_log.txt',
+        qc='logs/trim_log.txt'
+    output:
+        aln='tables/aln_table.tex',
+        qc='tables/qc_table.tex'
+    shell:
+        """
+        python scripts/make_aln_tab.py {input.aln} > {output.aln}
+        python scripts/make_qc_tab.py {input.qc} > {output.qc}
+        """
 
 rule clean:
     shell:
@@ -140,3 +151,4 @@ rule clean:
         rm -f ref/*ht2
         rm -f ref/*novel_splices.txt
         """
+
