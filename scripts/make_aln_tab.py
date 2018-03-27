@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import sys
 
-# Parse through the output log from hisat2
+# make a latex table from logs/aln_log.txt
+# will contain hisat2 alignment data
 
 def make_row(row):
     '''replace spaces with single & for latex table'''

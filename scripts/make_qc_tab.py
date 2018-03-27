@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import sys
 
-# Parse through the output log from hisat2 in SE mode
-#outfile_h = open('../logs/alnment_table.tex'
+# make a latex table from logs/trim_log.txt
+# will contain qc information from bbduk
 
 def make_row(row):
     '''replace spaces with single & for latex table'''
