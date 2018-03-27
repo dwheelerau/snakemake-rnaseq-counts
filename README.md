@@ -30,8 +30,8 @@ removed during the cleaning process.
 
 ## Rules  
 rule all - Run entire pipeline, need to have run ```project_setup``` and
-```make_index```
-rule project_setup - setup directory structure  
+```make_index```  
+rule project_setup - setup directory structure   
 rule make_index - create hisat2 index from reference.fa file  
 rule qc_trim - bbduk.sh qc script  
 rule aln - hisat2 alnment  
