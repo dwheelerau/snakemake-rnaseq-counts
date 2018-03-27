@@ -2,18 +2,41 @@
 This snakemake workflow will run a hisat2 - htseq count based gene count
 workflow. Trimming and filtering is also carried out using bbduk.  
 
-# Details  
-Open the `config.yaml` file in a text editor and change the params as required.  
+## envs  
+conda env available to run tihs pipeline ```conda create --name myenv --file env/env.yaml```
 
-# Requirements   
+## Details  
+Open the `config.yaml` file in a text editor and change the params as required.  
+You need to run ```project_setup``` and ```make_index``` before make all.   
+
+Run the make_latex_tables rule to generate latex tables from key log files  
+
+## Requirements   
 1.  The raw sequenced reads need to be found in a directory called `raw_reads`, the
 script expects the reads to be fastq.gz files, though it may work with standard
 fastq files, however these will be converted to gz files after the cleanup
 script.  
+
 2.  The file `contams_forward_rev.fa` contains adaptors etc that will be
 removed during the cleaning process. 
+
 3.  All directories need to be in the sample place as the Snakemake file.  
+
 4.  Run the script using `nohup snakemake all --cores 24 > snakemake_run.log
     &`, using as many cores are you have available.  
+
 5.  The final output will be ht-seq based counts for each sample. These can be
     used as raw reads for DESeq2.
+
+## Rules  
+rule all - Run entire pipeline, need to have run ```project_setup``` and
+```make_index```
+rule project_setup - setup directory structure  
+rule make_index - create hisat2 index from reference.fa file  
+rule qc_trim - bbduk.sh qc script  
+rule aln - hisat2 alnment  
+rule sam_to_bam  - convert sam to bam  
+rule do_counts - generate read counts  
+rule log_count_result - log last 5 lines of each count file  
+rule make_latex_tables - generate latex tables from key log files for aln and
+qc  

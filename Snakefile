@@ -26,7 +26,8 @@ rule all:
         expand('{INDEX}.1.ht2', INDEX=INDEX),
         expand('bams/{sample}.sam', sample=SAMPLES),
         expand('bams/{sample}.sbn.bam', sample=SAMPLES),
-        expand('counts/{sample}.sbn.counts', sample=SAMPLES)
+        expand('counts/{sample}.sbn.counts', sample=SAMPLES),
+        'logs/count_results.log'
 
 rule project_setup:
     output: DIRS
@@ -119,3 +120,24 @@ rule do_counts:
     shell:
         'htseq-count -r name -s {params.strand} -f bam -m {params.countmode} {input} '
         '{GTF} > {output} 2> {log}'
+
+rule log_count_result:
+    input:
+        expand('counts/{sample}.sbn.counts', sample=SAMPLES)
+    output:
+        'logs/count_results.log',
+    shell:
+        'tail -n5 counts/*counts > {output}'
+
+rule make_latex_tables:
+    input:
+        aln='logs/aln_log.txt',
+        qc='logs/trim_log.txt'
+    output:
+        aln='tables/aln_table.tex',
+        qc='tables/qc_table.tex'
+    shell:
+        """
+        python scripts/make_aln_tab.py {input.aln} > {output.aln}
+        python scripts/make_qc_tab.py {input.qc} > {output.qc}
+        """
