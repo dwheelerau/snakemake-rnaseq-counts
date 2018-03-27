@@ -3,7 +3,7 @@ This snakemake workflow will run a hisat2 - htseq count based gene count
 workflow. Trimming and filtering is also carried out using bbduk.  
 
 ## envs  
-conda env available to run tihs pipeline ```conda create --name myenv --file env/env.yaml```
+conda env available to run this pipeline ```conda create --name myenv --file envs/myenv.yaml```
 
 ## Details  
 Open the `config.yaml` file in a text editor and change the params as required.  
