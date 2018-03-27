@@ -8,7 +8,7 @@ REF = config['genome']
 INDEX = config['index']
 GTF = config['gtf']
 ADAPTORS = config['adaptors']
-DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/']
+DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/', 'ref/', 'tables']
 
 # key step to get sample names from R1 read
 SAMPLES, = glob_wildcards(join('raw_reads',
