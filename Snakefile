@@ -5,6 +5,7 @@ configfile: "./config.yaml"
 
 # globals
 REF = config['genome']
+THREADS = config['threads']
 INDEX = config['index']
 GTF = config['gtf']
 ADAPTORS = config['adaptors']
@@ -39,7 +40,7 @@ rule make_index:
         expand('{REF}',REF=REF)
     output:
         expand('{INDEX}.1.ht2', INDEX=INDEX),
-    threads: 12
+    threads: THREADS
     log:
         'logs/index_log.txt'
     shell:
@@ -49,7 +50,7 @@ rule qc_trim:
     input:
         r1 = join('raw_reads', PATTERN_R1),
         r2 = join('raw_reads', PATTERN_R2)
-    threads: 12
+    threads: THREADS
     params:
         minlen=config['minlen'],
         qtrim=config['qtrim'],
@@ -78,25 +79,25 @@ rule aln:
     log:
         'logs/aln_log.txt'
     output:
-        sam='bams/{sample}.sam',
+        bam='bams/{sample}.bam',
         splice='ref/{sample}.novel_splices.txt'
     params:
         index=expand('{INDEX}',INDEX=INDEX),
         strand=config['alnstrand']
-    threads: 24
+    threads: THREADS
     shell:
         """
         echo {output.sam} >> {log}
-        hisat2 -p {threads} -x {params.index} -q --dta -1 {input.r1} -2 {input.r2} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} -S {output.sam} >> {log} 2>&1
+        hisat2 -p {threads} -x {params.index} -q --dta -1 {input.r1} -2 {input.r2} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} >> {log} 2>&1 | samtools view -b -o {output.bam}
         """
 
 rule sam_to_bam:
     input:
-        'bams/{sample}.sam'
+        'bams/{sample}.bam'
     output:
         'bams/{sample}.sbn.bam'
     shell:
-        "samtools view -bS {input} | samtools sort -n - bams/{wildcards.sample}.sbn"
+        "samtools sort -n {input} -o {output}; rm {input}"
 
 # does not work on name sorted files, bugger
 #rule aln_index:
