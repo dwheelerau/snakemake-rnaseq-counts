@@ -3,6 +3,7 @@ genome: "ref/Danio_rerio.GRCz10.dna.toplevel.fa"
 index: "ref/Danio_rerio.GRCz10.dna.toplevel"
 gtf: "ref/Danio_rerio.GRCz10.91.gtf"
 adaptors: "contams_forward_rev.fa"
+threads: 4
 
 # read pair pattern
 pat_r1: "{sample}_R1_001.fastq.gz"
