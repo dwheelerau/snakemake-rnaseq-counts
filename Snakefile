@@ -88,13 +88,14 @@ rule aln:
         hisat2 -p {threads} -x {params.index} -q --dta -U {input.r1} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} 2>> {log} | samtools -b -o {output.bam}
         """
 
+# DONT add a rm command here or the bam will be regenerated on a rerun.
 rule sam_to_bam:
     input:
         'bams/{sample}.bam'
     output:
         'bams/{sample}.sbn.bam'
     shell:
-        "samtools sort -n {input} -o {output}; rm {input}"
+        "samtools sort -n {input} -o {output}"
 
 # does not work on name sorted files, bugger
 # req position sorted bams, so leave for now?
