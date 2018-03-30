@@ -90,14 +90,15 @@ rule aln:
         echo {output.sam} >> {log}
         hisat2 -p {threads} -x {params.index} -q --dta -1 {input.r1} -2 {input.r2} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} 2>> {log} | samtools view -b -o {output.bam}
         """
-
+# don't delete the pos sorted bam or rerunning will try to regenerate it (ie
+# aln again...) 
 rule sam_to_bam:
     input:
         'bams/{sample}.bam'
     output:
         'bams/{sample}.sbn.bam'
     shell:
-        "samtools sort -n {input} -o {output}; rm {input}"
+        "samtools sort -n {input} -o {output}"
 
 # does not work on name sorted files, bugger
 #rule aln_index:
