@@ -13,8 +13,8 @@ DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/', 'ref/', 'tabl
 
 # key step to get sample names from R1 read
 SAMPLES, = glob_wildcards(join('raw_reads',
-    '{samples,2535[^/]+}_R1_001.fastq.gz'))
-
+    '{samples,CC9ARANXX-3492[^/]+}_R1_001.fastq.gz'))
+#CC9ARANXX-3492-01_R1_001.fastq.gz
 PATTERN_R1 = config['pat_r1']
 PATTERN_R2 = config['pat_r2']
 PATTERN_CLN_R1 = config['cln_r1']
