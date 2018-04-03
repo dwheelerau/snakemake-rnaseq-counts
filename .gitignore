@@ -10,3 +10,4 @@ tables/
 nohup*
 !scripts/
 !scripts/*
+!tests/

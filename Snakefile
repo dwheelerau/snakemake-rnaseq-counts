@@ -26,7 +26,7 @@ rule all:
         expand('clean_reads/{sample}_R1_001.cln.fastq.gz', sample=SAMPLES),
         REF, GTF, ADAPTORS, DIRS,
         expand('{INDEX}.1.ht2', INDEX=INDEX),
-        expand('bams/{sample}.sam', sample=SAMPLES),
+        expand('bams/{sample}.bam', sample=SAMPLES),
         expand('counts/{sample}.sbn.counts', sample=SAMPLES),
         'logs/count_results.log'
 
@@ -85,7 +85,7 @@ rule aln:
     shell:
         """
         echo {output.bam} >> {log}
-        hisat2 -p {threads} -x {params.index} -q --dta -U {input.r1} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} 2>> {log} | samtools -b -o {output.bam}
+        hisat2 -p {threads} -x {params.index} -q --dta -U {input.r1} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} 2>> {log} | samtools view -b -o {output.bam}
         """
 
 # DONT add a rm command here or the bam will be regenerated on a rerun.
@@ -150,7 +150,6 @@ rule clean:
         rm -f counts/*
         rm -f logs/*
         rm -f clean_reads/*
-        rm -f ref/*ht2
         rm -f ref/*novel_splices.txt
         """
 

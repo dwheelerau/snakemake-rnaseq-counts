@@ -1,0 +1,26 @@
+# resources
+genome: "ref/Danio_rerio.GRCz10.dna.toplevel.fa"
+index: "ref/Danio_rerio.GRCz10.dna.toplevel"
+gtf: "ref/Danio_rerio.GRCz10.91.gtf"
+adaptors: "contams_forward_rev.fa"
+threads: 4
+
+# read pair pattern
+pat_r1: "{sample}_R1_001.fastq.gz"
+cln_r1: "{sample}_R1_001.cln.fastq.gz"
+
+# trimming params
+minlen: 50
+qtrim: 'rl'
+trimq: 10
+ktrim: 'r'
+kwin: 21 
+mink: 11
+hdist: 1
+
+# mapping params hisat2 RF is nextseq stranded
+alnstrand: 'RF'
+
+# htseq-count 
+countstrand: 'reverse'
+mode: 'union'
