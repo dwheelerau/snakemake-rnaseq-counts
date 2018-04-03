@@ -25,7 +25,7 @@ rule all:
         expand('clean_reads/{sample}_R1_001.cln.fastq.gz', sample=SAMPLES),
         REF, GTF, ADAPTORS, DIRS,
         expand('{INDEX}.1.ht2', INDEX=INDEX),
-        expand('bams/{sample}.sam', sample=SAMPLES),
+        expand('bams/{sample}.bam', sample=SAMPLES),
         expand('bams/{sample}.sbn.bam', sample=SAMPLES),
         expand('counts/{sample}.sbn.counts', sample=SAMPLES),
         'logs/count_results.log'

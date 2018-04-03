@@ -40,3 +40,6 @@ rule do_counts - generate read counts
 rule log_count_result - log last 5 lines of each count file  
 rule make_latex_tables - generate latex tables from key log files for aln and
 qc  
+
+## Tests  
+ToDo: See singleEnd branch for example of running some tests 
