@@ -68,7 +68,7 @@ rule qc_trim:
     log:
         'logs/trim_log.txt'
     shell:
-        "/opt/bbmap/bbduk.sh in1={input.r1} in2={input.r2} out1={output.r1_out} out2={output.r2_out} "
+        "bbduk.sh in1={input.r1} in2={input.r2} out1={output.r1_out} out2={output.r2_out} "
         "minlen={params.minlen} qtrim={params.qtrim} trimq={params.trimq} "
         "ktrim={params.ktrim} k={params.kwin} mink={params.mink} "
         "ref={ADAPTORS} hdist={params.hdist} 2>&1 | tee -a {log}"
@@ -90,7 +90,7 @@ rule aln:
     threads: THREADS
     shell:
         """
-        echo {output.sam} >> {log}
+        echo {output.bam} >> {log}
         hisat2 -p {threads} -x {params.index} -q --dta -1 {input.r1} -2 {input.r2} --rna-strandness {params.strand} --novel-splicesite-outfile {output.splice} 2>> {log} | samtools view -b -o {output.bam}
         """
 # don't delete the pos sorted bam or rerunning will try to regenerate it (ie
@@ -145,4 +145,15 @@ rule make_latex_tables:
         """
         python scripts/make_aln_tab.py {input.aln} > {output.aln}
         python scripts/make_qc_tab.py {input.qc} > {output.qc}
+        """
+
+rule clean:
+    shell:
+        """
+        rm -f bams/*
+        rm -f tables/*
+        rm -f counts/*
+        rm -f logs/*
+        rm -f clean_reads/*
+        rm -f ref/*novel_splices.txt
         """
