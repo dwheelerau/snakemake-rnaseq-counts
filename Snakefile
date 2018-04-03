@@ -20,6 +20,9 @@ PATTERN_R2 = config['pat_r2']
 PATTERN_CLN_R1 = config['cln_r1']
 PATTERN_CLN_R2 = config['cln_r2']
 
+print('using the following sample wildcards')
+print(SAMPLES)
+
 rule all:
     input:
         expand('clean_reads/{sample}_R1_001.cln.fastq.gz', sample=SAMPLES),

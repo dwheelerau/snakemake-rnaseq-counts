@@ -8,3 +8,5 @@ counts/
 logs/
 tables/
 nohup*
+!tests/
+!tests/*
