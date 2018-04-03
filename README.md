@@ -58,4 +58,6 @@ To test the pipeline:
  ```
 diff counts/CC9ARANXX-3492-01.sbn.counts tests/CC9ARANXX-3492-01.sbn.counts  
 diff counts/CC9ARANXX-3492-02.sbn.counts tests/CC9ARANXX-3492-02.sbn.counts  
+
+Be aware there will likely be differences, but these should be minor.  
 ```
