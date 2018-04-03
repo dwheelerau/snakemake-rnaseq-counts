@@ -42,4 +42,20 @@ rule make_latex_tables - generate latex tables from key log files for aln and
 qc  
 
 ## Tests  
-ToDo: See singleEnd branch for example of running some tests 
+## Tests  
+To test the pipeline:  
+1.  Copy the tests/config.yaml to the base directory  
+2.  Copy tests/*.gz to raw_reads/  
+3.  Download (from ensembl) ```Danio_rerio.GRCz10.dna.toplevel.fa``` and copy
+    to
+    ref/  
+4.  Download (from ensembl) ```ref/Danio_rerio.GRCz10.91.gtf``` and copy to
+    ref/  
+5.  Run ```snakemake project_setup```  
+6.  Run ```snakemake make_index```  
+7.  Run ```snakemake all```  
+8.  Check the result:  
+ ```
+diff counts/CC9ARANXX-3492-01.sbn.counts tests/CC9ARANXX-3492-01.sbn.counts  
+diff counts/CC9ARANXX-3492-02.sbn.counts tests/CC9ARANXX-3492-02.sbn.counts  
+```
