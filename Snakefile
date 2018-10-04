@@ -12,7 +12,7 @@ ADAPTORS = config['adaptors']
 DIRS = ['bams/', 'raw_reads/', 'clean_reads/', 'logs/', 'counts/', 'tables/', 'ref/']
 
 # key step to get sample names from R1 read, example: AG0069-01_R1_001.fastq.gz
-SAMPLES, = glob_wildcards('raw_reads/{samples}_R1_001.fastq.gz')
+SAMPLES, = glob_wildcards('raw_reads/{sample}_R1_001.fastq.gz')
 
 print('Using the following sample wildcards')
 print(SAMPLES)
