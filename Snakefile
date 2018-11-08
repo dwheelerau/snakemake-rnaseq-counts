@@ -100,7 +100,7 @@ rule sam_to_bam:
     output:
         'bams/{sample}.sbn.bam'
     shell:
-        "samtools sort -n {input} -o {output}"
+        "samtools sort -f -@ 4 -m 20G -n {input} -o {output}"
 
 # does not work on name sorted files, bugger
 #rule aln_index:
