@@ -103,6 +103,9 @@ rule sam_to_bam:
     shell:
         #"samtools sort -@ 4 -m 20G -n {input} -o {output}"
         # think about filtering non-uniuq mapped reads here
+        # but see discussion here on not removing them: https://www.biostars.org/p/55648/
+        # and a dicusssion on removing them: http://www.bioconductor.org/help/course-materials/2015/CSAMA2015/lect/L05-deseq2-anders.pdf
+        # MY typical workflow is not too remove them unless lots in the data QC
 
 # does not work on name sorted files, bugger
 #rule aln_index:
