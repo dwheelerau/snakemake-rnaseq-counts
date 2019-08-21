@@ -94,13 +94,15 @@ rule aln:
         """
 # don't delete the pos sorted bam or rerunning will try to regenerate it (ie
 # aln again...) 
+#### WARNING BROKEN ####
 rule sam_to_bam:
     input:
         'bams/{sample}.bam'
     output:
         'bams/{sample}.sbn.bam'
     shell:
-        "samtools sort -f -@ 4 -m 20G -n {input} -o {output}"
+        #"samtools sort -@ 4 -m 20G -n {input} -o {output}"
+        # think about filtering non-uniuq mapped reads here
 
 # does not work on name sorted files, bugger
 #rule aln_index:
